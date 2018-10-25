@@ -29,6 +29,6 @@ steps:
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
     
-- name: Write output
+- task: Write output
   shell: |
     echo '$(Build.Repository.Uri)'
