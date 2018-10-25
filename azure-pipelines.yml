@@ -28,5 +28,3 @@ steps:
   inputs:
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
-    
-'$(Build.Repository.Uri)'
