@@ -28,3 +28,7 @@ steps:
   inputs:
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
+    
+- name: Write output
+  shell: |
+    echo '$(Build.Repository.Uri)'
