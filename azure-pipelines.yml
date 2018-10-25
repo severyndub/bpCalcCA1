@@ -26,8 +26,5 @@ steps:
 
 - task: VSTest@2
   inputs:
-    testAssemblyVer2: |
-     **\bin\$(BuildConfiguration)\*UnitTest*.dll
-    codeCoverageEnabled: true
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
