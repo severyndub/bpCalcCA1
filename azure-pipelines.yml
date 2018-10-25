@@ -29,4 +29,4 @@ steps:
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
     
-- just: '$(Build.Repository.Uri)'
+'$(Build.Repository.Uri)'
