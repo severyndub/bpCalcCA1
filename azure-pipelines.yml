@@ -6,11 +6,6 @@
 pool:
   vmImage: 'VS2017-Win2016'
 
-queue:
-  name: Hosted VS2017
-  demands: 
-  - vsbuild
-  - vstest
 
 variables:
   solution: '**/BPCalculator.sln'
@@ -32,8 +27,5 @@ steps:
 
 - task: VSTest@2
   inputs:
-    testAssemblyVer2: |
-     **\bin\$(BuildConfiguration)\*UnitTest*.dll
-    codeCoverageEnabled: true
-    platform: '$(BuildPlatform)'
-    configuration: '$(BuildConfiguration)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
