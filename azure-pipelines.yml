@@ -71,8 +71,8 @@ steps:
     ArtifactName: '$(artifactsName)'
 
 - task: AzureRmWebAppDeployment@3
-  displayName: 'Azure App Service Deploy: BPCalculator1'
+  displayName: 'Azure App Service Deploy: bpCalcCA1'
   inputs:
-    azureSubscription: 'BPCalculator1 - Service Endpoint'
-    WebAppName: BPCalculator1
+    azureSubscription: 'bpCalcCA1 - Service Endpoint'
+    WebAppName: bpCalcCA1
     
