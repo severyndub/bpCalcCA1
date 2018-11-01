@@ -6,10 +6,6 @@
 pool:
   vmImage: 'VS2017-Win2016'
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 14231e17bf44e265afd51e25ace63ec63840ff0e
 variables:
   solution: '**/BPCalculator.sln'
   buildPlatform: 'Any CPU'
@@ -30,10 +26,6 @@ steps:
 
 - task: VSTest@2
   inputs:
-<<<<<<< HEAD
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-=======
-    platform: '$(BuildPlatform)'
-    configuration: '$(BuildConfiguration)'
->>>>>>> 14231e17bf44e265afd51e25ace63ec63840ff0e
+
