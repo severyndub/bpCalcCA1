@@ -73,6 +73,6 @@ steps:
 - task: AzureRmWebAppDeployment@3
   displayName: 'Azure App Service Deploy: bpCalcCA1'
   inputs:
-    azureSubscription: 'bpCalcCA1 - Service Endpoint'
+    azureSubscription: 'azureServiceEndpoint01'
     WebAppName: bpCalcCA1
     
