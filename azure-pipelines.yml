@@ -37,7 +37,7 @@ steps:
   displayName: 'Test Assemblies'
   inputs:
     testAssemblyVer2: |
-     **\$(buildConfiguration)\*unittest*.dll
+     **\$(buildConfiguration)\*UnitTestProject2*.dll
      !**\obj\**
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
