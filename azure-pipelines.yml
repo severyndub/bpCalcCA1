@@ -77,4 +77,5 @@ steps:
     azureSubscription: 'azureServiceEndpoint01'
     WebAppName: BPCalculator1
     Package: 'D:\a\1\s\BPCalculator'
+    UseWebDeploy: true
     
