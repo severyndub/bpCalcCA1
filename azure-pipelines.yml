@@ -74,5 +74,5 @@ steps:
   displayName: 'Azure App Service Deploy: bpCalcCA1'
   inputs:
     azureSubscription: 'azureServiceEndpoint01'
-    WebAppName: bpCalcCA1
+    WebAppName: BPCalculator1
     
