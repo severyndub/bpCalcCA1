@@ -24,7 +24,6 @@ steps:
 #Your build pipeline references an undefined variable named ‘Parameters.solution’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 #Your build pipeline references the ‘BuildPlatform’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
 #Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-steps:
 - task: VSBuild@1
   displayName: 'Build solution'
   inputs:
@@ -34,7 +33,6 @@ steps:
     configuration: '$(buildConfiguration)'
     createLogFile: true
 
-steps:
 - task: VSTest@2
   displayName: 'Test Assemblies'
   inputs:
@@ -44,14 +42,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-steps:
 - task: PublishSymbols@1
   displayName: 'Publish symbols path'
   inputs:
     SearchPattern: '**\bin\**\*.pdb'
   continueOnError: true
 
-steps:
 - task: CopyFiles@2
   displayName: 'Copy functional test files'
   inputs:
@@ -62,14 +58,12 @@ steps:
     TargetFolder: '$(build.artifactstagingdirectory)\FunctionalTests'
     flattenFolders: true
 
-steps:
 - task: CopyFiles@2
   displayName: 'Copy ARM templates'
   inputs:
     SourceFolder: ArmTemplates
     TargetFolder: '$(build.artifactstagingdirectory)'
 
-steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
