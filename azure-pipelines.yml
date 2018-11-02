@@ -42,26 +42,9 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: PublishSymbols@1
-  displayName: 'Publish symbols path'
-  inputs:
-    SearchPattern: '**\bin\**\*.pdb'
-  continueOnError: true
-
-- task: CopyFiles@2
-  displayName: 'Copy functional test files'
-  inputs:
-    SourceFolder: '$(agent.builddirectory)'
-    Contents: |
-     **\*.runsettings
-     **\*FunctionalTest*\**\bin\$(buildConfiguration)\**
-    TargetFolder: '$(build.artifactstagingdirectory)\FunctionalTests'
-    flattenFolders: true
-
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
-    #PathtoPublish: '$(build.artifactstagingdirectory)'
     PathtoPublish: 'BPCalculator'
     ArtifactName: '$(artifactsName)'
 
@@ -70,7 +53,8 @@ steps:
   inputs:
     azureSubscription: 'azureServiceEndpoint01'
     WebAppName: BPCalculator1
-    Package: 'D:\a\1\s\BPCalculator'
+    #Package: 'D:\a\1\s\BPCalculator'
+    Package: '#/2396012/bpCalcArtifacts'
     WebAppUri: webAppUrl
     TakeAppOfflineFlag: true
     UseWebDeploy: true
