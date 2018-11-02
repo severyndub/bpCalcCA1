@@ -53,8 +53,7 @@ steps:
   inputs:
     azureSubscription: 'azureServiceEndpoint01'
     WebAppName: BPCalculator1
-    #Package: 'D:\a\1\s\BPCalculator'
-    Package: '#/2396012/bpCalcArtifacts'
+    Package: 'D:\a\1\s\BPCalculator'
     WebAppUri: webAppUrl
     TakeAppOfflineFlag: true
     UseWebDeploy: true
