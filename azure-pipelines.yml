@@ -48,7 +48,7 @@ steps:
     PathtoPublish: 'BPCalculator'
     ArtifactName: '$(artifactsName)'
 
-- task: AzureRmWebAppDeployment@3
+- task: AzureRmWebAppDeployment@4
   displayName: 'Azure App Service Deploy: bpCalcCA1'
   inputs:
     azureSubscription: 'azureServiceEndpoint01'
@@ -57,4 +57,4 @@ steps:
     WebAppUri: webAppUrl
     TakeAppOfflineFlag: true
     UseWebDeploy: true
-    RenameFilesFlag: true
+    #RenameFilesFlag: true
