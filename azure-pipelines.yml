@@ -52,7 +52,7 @@ steps:
   displayName: 'Azure App Service Deploy: bpCalcCA1'
   inputs:
     azureSubscription: 'bpCalcConnection'
-    WebAppName: bpcalctest
+    WebAppName: bpcalctest2
     Package: 'D:\a\1\s\BPCalculator'
     WebAppUri: webAppUrl
     TakeAppOfflineFlag: true
