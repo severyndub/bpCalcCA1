@@ -57,4 +57,4 @@ steps:
     WebAppUri: webAppUrl
     TakeAppOfflineFlag: true
     UseWebDeploy: true
-    #RenameFilesFlag: true
+    RemoveAdditionalFilesFlag: true
