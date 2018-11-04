@@ -51,8 +51,8 @@ steps:
 - task: AzureRmWebAppDeployment@4
   displayName: 'Azure App Service Deploy: bpCalcCA1'
   inputs:
-    azureSubscription: 'azureServiceEndpoint01'
-    WebAppName: BPCalculator1
+    azureSubscription: 'bpCalcConnection'
+    WebAppName: bpcalctest
     Package: 'D:\a\1\s\BPCalculator'
     WebAppUri: webAppUrl
     TakeAppOfflineFlag: true
