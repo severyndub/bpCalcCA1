@@ -53,8 +53,8 @@ namespace SelenuimTest
         [TestInitialize()]
         public void SetupTest()
         {
-            //appURL = "https://bpcalctest.azurewebsites.net/BloodPressure";
-            appURL = "http://localhost:40328/bloodpressure";
+            appURL = "https://bpcalctest.azurewebsites.net/BloodPressure";
+            //appURL = "http://localhost:40328/bloodpressure";
             string browser = "Chrome";
             switch (browser)
             {
