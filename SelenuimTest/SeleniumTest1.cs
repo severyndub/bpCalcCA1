@@ -6,7 +6,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
 
-namespace SelenuimTest
+namespace SeleniumTest
 {
     [TestClass]
     public class SeleniumTest1
@@ -19,7 +19,7 @@ namespace SelenuimTest
         { }
 
         [TestMethod]
-        [TestCategory("Firefox")]
+        [TestCategory("Chrome")]
         public void PreHighTest()
         {
             driver.Navigate().GoToUrl(appURL + "/");
@@ -29,9 +29,9 @@ namespace SelenuimTest
             driver.FindElement(By.Id("BP_Systolic")).SendKeys("120");
             driver.FindElement(By.Id("BP_Diastolic")).Clear();
             driver.FindElement(By.Id("BP_Diastolic")).SendKeys("80");
+            driver.FindElement(By.Id("BP_Systolic")).Click();
             string resultText = driver.FindElement(By.Id("bpCategoryResult")).Text;           
             Assert.IsTrue(resultText.Equals("Pre-High Blood Pressure"));
-            //Assert.IsTrue(driver.Title.Contains("Azure Pipelines"), "Verified title of the page");
         }
 
         /// <summary>
