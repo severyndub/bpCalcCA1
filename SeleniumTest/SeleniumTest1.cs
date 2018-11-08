@@ -19,7 +19,7 @@ namespace SeleniumTest
         { }
 
         [TestMethod]
-        [TestCategory("Chrome")]
+        [TestCategory("Firefox")]
         public void PreHighTest()
         {
             
@@ -55,7 +55,7 @@ namespace SeleniumTest
         public void SetupTest()
         {
             appURL = "https://bpcalctest-bpcalcqa.azurewebsites.net/";
-            string browser = "Chrome";
+            string browser = "Firefox";
             switch (browser)
             {
                 case "Chrome":
