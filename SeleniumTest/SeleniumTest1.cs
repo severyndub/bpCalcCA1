@@ -22,7 +22,8 @@ namespace SeleniumTest
         [TestCategory("Chrome")]
         public void PreHighTest()
         {
-            driver.Navigate().GoToUrl(appURL + "/");
+            
+            driver.Navigate().GoToUrl(appURL + "/BloodPressure");
             //Clear the input fields
             driver.FindElement(By.Id("BP_Systolic")).Clear();
             //insert some test data
@@ -53,12 +54,13 @@ namespace SeleniumTest
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "https://bpcalctest-bpcalcqa.azurewebsites.net/BloodPressure";
+            appURL = "https://bpcalctest-bpcalcqa.azurewebsites.net/";
             string browser = "Chrome";
             switch (browser)
             {
                 case "Chrome":
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver() { Url = appURL};
+                    
                     break;
                 case "Firefox":
                     driver = new FirefoxDriver();
