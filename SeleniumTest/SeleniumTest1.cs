@@ -53,7 +53,7 @@ namespace SeleniumTest
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "https://bpcalctest.azurewebsites.net/BloodPressure";
+            appURL = "https://bpcalctest-bpcalcqa.azurewebsites.net/BloodPressure";
             string browser = "Chrome";
             switch (browser)
             {
