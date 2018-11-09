@@ -22,8 +22,8 @@ namespace SeleniumTest
         [TestCategory("Chrome")]
         public void HighPressureTest()
         {
-            ChromeOptions test = new ChromeOptions();
-            test.AddArgument("no - sandbox");
+            //ChromeOptions test = new ChromeOptions();
+            //test.AddArgument("no - sandbox");
             driver.Navigate().GoToUrl(appURL + "/BloodPressure");
             //Clear the input fields
             driver.FindElement(By.Id("BP_Systolic")).Clear();
@@ -40,8 +40,8 @@ namespace SeleniumTest
         [TestCategory("Chrome")]
         public void PreHighTest()
         {
-            ChromeOptions test = new ChromeOptions();
-            test.AddArgument("no - sandbox");
+            //ChromeOptions test = new ChromeOptions();
+            //test.AddArgument("no - sandbox");
             driver.Navigate().GoToUrl(appURL + "/BloodPressure");
             //Clear the input fields
             driver.FindElement(By.Id("BP_Systolic")).Clear();
@@ -60,8 +60,8 @@ namespace SeleniumTest
         public void NormalPressureTest()
         {
             ChromeOptions test = new ChromeOptions();
-            test.AddArgument("no - sandbox");
-            driver.Navigate().GoToUrl(appURL + "/BloodPressure");
+            //test.AddArgument("no - sandbox");
+            //driver.Navigate().GoToUrl(appURL + "/BloodPressure");
             //Clear the input fields
             driver.FindElement(By.Id("BP_Systolic")).Clear();
             //insert some test data
@@ -78,8 +78,8 @@ namespace SeleniumTest
         public void LowPressureTest()
         {
             ChromeOptions test = new ChromeOptions();
-            test.AddArgument("no - sandbox");
-            driver.Navigate().GoToUrl(appURL + "/BloodPressure");
+            //test.AddArgument("no - sandbox");
+            //driver.Navigate().GoToUrl(appURL + "/BloodPressure");
             //Clear the input fields
             driver.FindElement(By.Id("BP_Systolic")).Clear();
             //insert some test data
@@ -116,8 +116,7 @@ namespace SeleniumTest
             switch (browser)
             {
                 case "Chrome":
-                    driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
-                    
+                    driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));                  
                     break;
                 case "Firefox":
                     driver = new FirefoxDriver(Environment.GetEnvironmentVariable("GeckoWebDriver"));

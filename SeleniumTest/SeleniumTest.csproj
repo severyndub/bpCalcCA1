@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="SeleniumTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeleniumTest2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
