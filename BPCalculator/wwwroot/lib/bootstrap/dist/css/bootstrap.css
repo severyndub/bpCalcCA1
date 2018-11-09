@@ -2631,6 +2631,28 @@ input[type="search"] {
 .form-group {
   margin-bottom: 15px;
 }
+
+/*Css class for changing text colour*/
+.cssLow, .form-group {
+    color: cornflowerblue;
+}
+
+.cssNormal, .form-group {
+    color: dodgerblue;
+}
+
+.cssPreHigh, .form-group {
+    color: coral;
+}
+
+.cssHigh, .form-group {
+    color: crimson;
+}
+
+.cssAbnormal, .form-group {
+    color: firebrick;
+}
+
 .radio,
 .checkbox {
   position: relative;
