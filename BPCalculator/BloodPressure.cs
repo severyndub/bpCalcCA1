@@ -5,7 +5,6 @@ namespace BPCalculator
     // BP categories
     public enum BPCategory
     {
-
         [Display(Name = "Low Blood Pressure")] Low,
         [Display(Name = "Normal Blood Pressure")] Normal,
         [Display(Name = "Pre-High Blood Pressure")] PreHigh,
@@ -51,6 +50,36 @@ namespace BPCalculator
                 else
                 { return BPCategory.Abnormal; }
             }
+        }
+
+        /// <summary>
+        /// Takes category and returns class to allow for text colour change.
+        /// </summary>
+        /// <param name="category">blood pressure category</param>
+        /// <returns>css class</returns>
+        public string GetDivClass(BPCategory category)
+        {
+            string cssClass = string.Empty;
+            switch (category)
+            {
+                case BPCategory.Low:
+                    cssClass = "cssLow";
+                    break;
+                case BPCategory.Normal:
+                    cssClass = "cssNormal";
+                    break;
+                case BPCategory.PreHigh:
+                    cssClass = "cssPreHigh";
+                    break;
+                case BPCategory.High:
+                    cssClass = "cssHigh";
+                    break;
+                default:
+                    cssClass = "cssAbnormal";
+                    break;
+            }
+
+            return cssClass;
         }
 
         /// <summary>
