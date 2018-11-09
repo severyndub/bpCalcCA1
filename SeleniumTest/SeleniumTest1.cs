@@ -22,7 +22,8 @@ namespace SeleniumTest
         [TestCategory("Firefox")]
         public void PreHighTest()
         {
-            
+            ChromeOptions test = new ChromeOptions();
+            test.AddArgument("no - sandbox");
             driver.Navigate().GoToUrl(appURL + "/BloodPressure");
             //Clear the input fields
             driver.FindElement(By.Id("BP_Systolic")).Clear();
@@ -59,7 +60,7 @@ namespace SeleniumTest
             switch (browser)
             {
                 case "Chrome":
-                    driver = new ChromeDriver() { Url = appURL};
+                    driver = new ChromeDriver();
                     
                     break;
                 case "Firefox":
