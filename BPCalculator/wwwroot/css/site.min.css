@@ -21,31 +21,33 @@ body {
     margin: 15px
 }
 
+.form-bottom {
+    margin-bottom: 15px;
+}
+
 @media screen and (max-width:767px) {
     .carousel-caption {
         display: none
     }
 }
-/*Css class for changing text colour*/
 
-.cssLow {
-    color: cornflowerblue;
-    margin-bottom: 15px;
+/*Css class for changing text colour*/
+.cssLow, .form-bottom {
+    color: #6495ED;
 }
 
 .cssNormal {
-    color: dodgerblue;
-    margin-bottom: 150px;
+    color: #228B22;
 }
 
 .cssPreHigh {
-    color: coral;
+    color: #FF7F50;
 }
 
 .cssHigh {
-    color: crimson;
+    color: #DC143C;
 }
 
 .cssAbnormal {
-    color: firebrick;
+    color: #B22222;
 }

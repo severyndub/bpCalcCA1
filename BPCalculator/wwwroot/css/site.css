@@ -33,28 +33,3 @@ body {
         display: none;
     }
 }
-
-
-/*Css class for changing text colour*/
-
-.cssLow {
-    color: cornflowerblue;
-    margin-bottom: 15px;
-}
-
-.cssNormal {
-    color: dodgerblue;
-    margin-bottom: 150px;
-}
-
-.cssPreHigh {
-    color: coral;
-}
-
-.cssHigh {
-    color: crimson;
-}
-
-.cssAbnormal {
-    color: firebrick;
-}
