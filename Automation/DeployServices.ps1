@@ -32,10 +32,10 @@ param(
  $resourceGroupLocation = "",
 
  [string]
- $templateFilePath = "template.json",
+ $templateFilePath = "$(System.DefaultWorkingDirectory)/bpCalcArtifacts/bpCalcArtifacts/Automation/template.json",
 
  [string]
- $parametersFilePath = "parameters.json"
+ $parametersFilePath = "$(System.DefaultWorkingDirectory)/bpCalcArtifacts/bpCalcArtifacts/Automation/parameters.json"
 )
 
 <#
