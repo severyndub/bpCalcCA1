@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "myAppName": {
+        "value": "bpCalcApp"
+      },
+      "servicePlanName": {
+        "value": "ServicePlan1"
+      },
+      "hostingEnvironment": {
+        "value": ""
+      },
+      "location": {
+        "value": "North Europe"
+      },
+      "sku": {
+        "value": "Standard"
+      },
+      "skuCode": {
+        "value": "S1"
+      },
+      "workerSize": {
+        "value": "0"
+      },
+      "serverFarmResourceGroup": {
+        "value": "bpCalcRG"
+      },
+      "subscriptionId": {
+        "value": "961d6a2a-a993-44f5-bf3a-1fd3cb50404a"
+      }
+    }
+  }
