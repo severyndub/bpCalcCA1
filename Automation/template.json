@@ -3,6 +3,12 @@
         "myAppName": {
             "type": "string"
         },
+        "stagingSlot1Name": {
+            "type": "string"
+        },
+        "stagingSlot2Name": {
+            "type": "string"
+        },
         "servicePlanName": {
             "type": "string"
         },
@@ -26,6 +32,9 @@
         },
         "subscriptionId": {
             "type": "string"
+        },
+        "config_web_name": {
+            "type": "string"
         }
     },
     "resources": [
@@ -44,6 +53,47 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Web/serverfarms/', parameters('servicePlanName'))]"
+            ],
+            "resources": [
+                {
+                  "apiVersion": "2015-08-01",
+                  "name": "[parameters('stagingSlot1Name')]",
+                  "type": "slots",
+                  "location": "[parameters('location')]",
+                  "dependsOn": [
+                    "[resourceId('Microsoft.Web/Sites', parameters('myAppName'))]"
+                  ],
+                  "properties": {
+                  },
+                  "resources": []
+                },
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "[parameters('stagingSlot2Name')]",
+                    "type": "slots",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                      "[resourceId('Microsoft.Web/Sites', parameters('myAppName'))]"
+                    ],
+                    "properties": {
+                      "minTlsVersion": "1.2"
+                    },
+                    "resources": []
+                  }
+              ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/config",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlot1Name'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "minTlsVersion": "1.0"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlot1Name'))]"
             ]
         },
         {

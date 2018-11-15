@@ -5,6 +5,12 @@
       "myAppName": {
         "value": "bpCalcApp"
       },
+      "stagingSlot1Name":{
+        "value": "bpCalcQa"
+      },
+      "stagingSlot2Name": {
+        "value": "bpCalcJlp"
+      },
       "servicePlanName": {
         "value": "ServicePlan1"
       },
@@ -28,6 +34,9 @@
       },
       "subscriptionId": {
         "value": "961d6a2a-a993-44f5-bf3a-1fd3cb50404a"
+      },
+      "config_web_name": {
+          "value": "web"
       }
     }
   }
