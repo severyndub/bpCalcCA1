@@ -64,6 +64,7 @@
                     "[resourceId('Microsoft.Web/Sites', parameters('myAppName'))]"
                   ],
                   "properties": {
+                    "minTlsVersion": "1.0"
                   },
                   "resources": []
                 },
@@ -76,11 +77,25 @@
                       "[resourceId('Microsoft.Web/Sites', parameters('myAppName'))]"
                     ],
                     "properties": {
-                      "minTlsVersion": "1.2"
+                      "minTlsVersion": "1.0"
                     },
                     "resources": []
                   }
               ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/config",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlot1Name'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "minTlsVersion": "1.0"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlot1Name'))]"
+            ]
         },
         {
             "apiVersion": "2016-09-01",
