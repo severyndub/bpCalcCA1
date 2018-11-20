@@ -102,7 +102,7 @@ namespace SeleniumTest
         [TestInitialize()]
         public void SetupTest()
         {
-            appURL = "https://bpcalcapp-bccalcqa.azurewebsites.net/";
+            appURL = "https://bpcalcapp-bpcalcqa.azurewebsites.net";
             string browser = "Chrome";
             switch (browser)
             {
