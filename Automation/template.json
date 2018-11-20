@@ -3,10 +3,10 @@
         "myAppName": {
             "type": "string"
         },
-        "stagingSlot1Name": {
+        "stagingSlotQAName": {
             "type": "string"
         },
-        "stagingSlot2Name": {
+        "stagingSlotJLPName": {
             "type": "string"
         },
         "servicePlanName": {
@@ -35,83 +35,555 @@
         },
         "config_web_name": {
             "type": "string"
+        },
+        "hostNameBindings_bpcalcapp.azurewebsites.net_name": {
+            "type": "String"
+        },
+        "hostNameBindings_bpcalcapp_bpcalcqa.azurewebsites.net_name": {
+            "type": "String"
+        },
+        "hostNameBindings_bpcalcapp_bpcalcjlp.azurewebsites.net_name": {
+            "type": "String"
         }
     },
     "resources": [
         {
-            "apiVersion": "2016-08-01",
-            "name": "[parameters('myAppName')]",
-            "type": "Microsoft.Web/sites",
-            "properties": {
-                "name": "[parameters('myAppName')]",
-                "siteConfig": {
-                    "appSettings": []
-                },
-                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('servicePlanName'))]",
-                "hostingEnvironment": "[parameters('hostingEnvironment')]"
-            },
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('servicePlanName'))]"
-            ],
-            "resources": [
-                {
-                  "apiVersion": "2015-08-01",
-                  "name": "[parameters('stagingSlot1Name')]",
-                  "type": "slots",
-                  "location": "[parameters('location')]",
-                  "dependsOn": [
-                    "[resourceId('Microsoft.Web/Sites', parameters('myAppName'))]"
-                  ],
-                  "properties": {
-                    "minTlsVersion": "1.0"
-                  },
-                  "resources": []
-                },
-                {
-                    "apiVersion": "2015-08-01",
-                    "name": "[parameters('stagingSlot2Name')]",
-                    "type": "slots",
-                    "location": "[parameters('location')]",
-                    "dependsOn": [
-                      "[resourceId('Microsoft.Web/Sites', parameters('myAppName'))]"
-                    ],
-                    "properties": {
-                      "minTlsVersion": "1.0"
-                    },
-                    "resources": []
-                  }
-              ]
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/config",
-            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlot1Name'), '/', parameters('config_web_name'))]",
-            "apiVersion": "2016-08-01",
-            "location": "[parameters('location')]",
-            "scale": null,
-            "properties": {
-                "minTlsVersion": "1.0"
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
-                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlot1Name'))]"
-            ]
-        },
-        {
             "apiVersion": "2016-09-01",
             "name": "[parameters('servicePlanName')]",
             "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "Tier": "[parameters('sku')]",
+                "Name": "[parameters('skuCode')]",
+                "size": "S1",
+                "family": "S",
+                "capacity": 1
+            },
+            "kind": "app",
             "location": "[parameters('location')]",
+            "scale": null,
             "properties": {
                 "name": "[parameters('servicePlanName')]",
                 "workerSizeId": "[parameters('workerSize')]",
                 "numberOfWorkers": "1",
                 "hostingEnvironment": "[parameters('hostingEnvironment')]"
             },
-            "sku": {
-                "Tier": "[parameters('sku')]",
-                "Name": "[parameters('skuCode')]"
-            }
+            "dependsOn": []
+        },
+		{
+            "apiVersion": "2016-08-01",
+            "name": "[parameters('myAppName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[parameters('location')]",
+            "properties": {
+            "enabled": true,
+		    "name": "[parameters('myAppName')]",
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('myAppName'),'bpcalcapp.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+		            {
+                        "name": "[concat(parameters('myAppName'),'bpcalcapp.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('servicePlanName'))]",
+                "hostingEnvironment": "[parameters('hostingEnvironment')]",
+                "reserved": false,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "name": "[concat(parameters('myAppName'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "pythonVersion": "",
+                "nodeVersion": "",
+                "linuxFxVersion": "",
+                "windowsFxVersion": null,
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2017",
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$bpCalcApp",
+                "publishingPassword": null,
+                "appSettings": null,
+                "azureStorageAccounts": {},
+                "metadata": null,
+                "connectionStrings": null,
+                "machineKey": null,
+                "handlerMappings": null,
+                "documentRoot": null,
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "javaVersion": null,
+                "javaContainer": null,
+                "javaContainerVersion": null,
+                "appCommandLine": "",
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false,
+                        "virtualDirectories": null
+                    }
+                ],
+                "winAuthAdminState": 0,
+                "winAuthTenantState": 0,
+                "customAppPoolIdentityAdminState": false,
+                "customAppPoolIdentityTenantState": false,
+                "runtimeADUser": null,
+                "runtimeADUserPassword": null,
+                "loadBalancing": "LeastRequests",
+                "routingRules": [],
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "limits": null,
+                "autoHealEnabled": false,
+                "autoHealRules": null,
+                "tracingOptions": null,
+                "vnetName": "",
+                "siteAuthEnabled": false,
+                "siteAuthSettings": {
+                    "enabled": null,
+                    "unauthenticatedClientAction": null,
+                    "tokenStoreEnabled": null,
+                    "allowedExternalRedirectUrls": null,
+                    "defaultProvider": null,
+                    "clientId": null,
+                    "clientSecret": null,
+                    "clientSecretCertificateThumbprint": null,
+                    "issuer": null,
+                    "allowedAudiences": null,
+                    "additionalLoginParams": null,
+                    "isAadAutoProvisioned": false,
+                    "googleClientId": null,
+                    "googleClientSecret": null,
+                    "googleOAuthScopes": null,
+                    "facebookAppId": null,
+                    "facebookAppSecret": null,
+                    "facebookOAuthScopes": null,
+                    "twitterConsumerKey": null,
+                    "twitterConsumerSecret": null,
+                    "microsoftAccountClientId": null,
+                    "microsoftAccountClientSecret": null,
+                    "microsoftAccountOAuthScopes": null
+                },
+                "cors": null,
+                "push": null,
+                "apiDefinition": null,
+                "autoSwapSlotName": null,
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": null,
+                "xManagedServiceIdentityId": null,
+                "ipSecurityRestrictions": null,
+                "http20Enabled": false,
+                "minTlsVersion": "1.0",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots",
+            "kind": "app",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlotJLPName'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat('bpcalcapp-bpcalcjlp.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat('bpcalcapp-bpcalcjlp.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]",
+                "reserved": false,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots",
+            "kind": "app",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlotQAName'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat('bpcalcapp-bpcalcqa.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat('bpcalcapp-bpcalcqa.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]",
+                "reserved": false,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null,
+                "httpsOnly": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/config",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlotJLPName'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "pythonVersion": "",
+                "nodeVersion": "",
+                "linuxFxVersion": "",
+                "windowsFxVersion": null,
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": null,
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$bpCalcApp__bpCalcJLP",
+                "publishingPassword": null,
+                "appSettings": null,
+                "azureStorageAccounts": {},
+                "metadata": null,
+                "connectionStrings": null,
+                "machineKey": null,
+                "handlerMappings": null,
+                "documentRoot": null,
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "javaVersion": null,
+                "javaContainer": null,
+                "javaContainerVersion": null,
+                "appCommandLine": "",
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false,
+                        "virtualDirectories": null
+                    }
+                ],
+                "winAuthAdminState": 0,
+                "winAuthTenantState": 0,
+                "customAppPoolIdentityAdminState": false,
+                "customAppPoolIdentityTenantState": false,
+                "runtimeADUser": null,
+                "runtimeADUserPassword": null,
+                "loadBalancing": "LeastRequests",
+                "routingRules": [],
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "limits": null,
+                "autoHealEnabled": false,
+                "autoHealRules": null,
+                "tracingOptions": null,
+                "vnetName": "",
+                "siteAuthEnabled": false,
+                "siteAuthSettings": {
+                    "enabled": null,
+                    "unauthenticatedClientAction": null,
+                    "tokenStoreEnabled": null,
+                    "allowedExternalRedirectUrls": null,
+                    "defaultProvider": null,
+                    "clientId": null,
+                    "clientSecret": null,
+                    "clientSecretCertificateThumbprint": null,
+                    "issuer": null,
+                    "allowedAudiences": null,
+                    "additionalLoginParams": null,
+                    "isAadAutoProvisioned": false,
+                    "googleClientId": null,
+                    "googleClientSecret": null,
+                    "googleOAuthScopes": null,
+                    "facebookAppId": null,
+                    "facebookAppSecret": null,
+                    "facebookOAuthScopes": null,
+                    "twitterConsumerKey": null,
+                    "twitterConsumerSecret": null,
+                    "microsoftAccountClientId": null,
+                    "microsoftAccountClientSecret": null,
+                    "microsoftAccountOAuthScopes": null
+                },
+                "cors": null,
+                "push": null,
+                "apiDefinition": null,
+                "autoSwapSlotName": null,
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": null,
+                "xManagedServiceIdentityId": null,
+                "ipSecurityRestrictions": null,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlotJLPName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/hostNameBindings",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlotJLPName'), '/', parameters('hostNameBindings_bpcalcapp_bpcalcjlp.azurewebsites.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "siteName": "bpCalcApp(bpCalcJLP)",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlotJLPName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/config",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlotQAName'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "pythonVersion": "",
+                "nodeVersion": "",
+                "linuxFxVersion": "",
+                "windowsFxVersion": null,
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2017",
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$bpCalcApp__bpCalcQA",
+                "publishingPassword": null,
+                "appSettings": null,
+                "azureStorageAccounts": {},
+                "metadata": null,
+                "connectionStrings": null,
+                "machineKey": null,
+                "handlerMappings": null,
+                "documentRoot": null,
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "javaVersion": null,
+                "javaContainer": null,
+                "javaContainerVersion": null,
+                "appCommandLine": "",
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false,
+                        "virtualDirectories": null
+                    }
+                ],
+                "winAuthAdminState": 0,
+                "winAuthTenantState": 0,
+                "customAppPoolIdentityAdminState": false,
+                "customAppPoolIdentityTenantState": false,
+                "runtimeADUser": null,
+                "runtimeADUserPassword": null,
+                "loadBalancing": "LeastRequests",
+                "routingRules": [],
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "limits": null,
+                "autoHealEnabled": false,
+                "autoHealRules": null,
+                "tracingOptions": null,
+                "vnetName": "",
+                "siteAuthEnabled": false,
+                "siteAuthSettings": {
+                    "enabled": null,
+                    "unauthenticatedClientAction": null,
+                    "tokenStoreEnabled": null,
+                    "allowedExternalRedirectUrls": null,
+                    "defaultProvider": null,
+                    "clientId": null,
+                    "clientSecret": null,
+                    "clientSecretCertificateThumbprint": null,
+                    "issuer": null,
+                    "allowedAudiences": null,
+                    "additionalLoginParams": null,
+                    "isAadAutoProvisioned": false,
+                    "googleClientId": null,
+                    "googleClientSecret": null,
+                    "googleOAuthScopes": null,
+                    "facebookAppId": null,
+                    "facebookAppSecret": null,
+                    "facebookOAuthScopes": null,
+                    "twitterConsumerKey": null,
+                    "twitterConsumerSecret": null,
+                    "microsoftAccountClientId": null,
+                    "microsoftAccountClientSecret": null,
+                    "microsoftAccountOAuthScopes": null
+                },
+                "cors": null,
+                "push": null,
+                "apiDefinition": null,
+                "autoSwapSlotName": null,
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": null,
+                "xManagedServiceIdentityId": null,
+                "ipSecurityRestrictions": null,
+                "http20Enabled": false,
+                "minTlsVersion": "1.0",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlotQAName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/hostNameBindings",
+            "name": "[concat(parameters('myAppName'), '/', parameters('stagingSlotQAName'), '/', parameters('hostNameBindings_bpcalcapp_bpcalcqa.azurewebsites.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "[parameters('location')]",
+            "scale": null,
+            "properties": {
+                "siteName": "bpCalcApp(bpCalcQA)",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('myAppName'))]",
+                "[resourceId('Microsoft.Web/sites/slots', parameters('myAppName'), parameters('stagingSlotQAName'))]"
+            ]
         }
     ],
     "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",

@@ -5,10 +5,10 @@
       "myAppName": {
         "value": "bpCalcApp"
       },
-      "stagingSlot1Name":{
+      "stagingSlotQAName":{
         "value": "bpCalcQa"
       },
-      "stagingSlot2Name": {
+      "stagingSlotJLPName": {
         "value": "bpCalcJlp"
       },
       "servicePlanName": {
@@ -37,6 +37,15 @@
       },
       "config_web_name": {
           "value": "web"
+      },
+      "hostNameBindings_bpcalcapp.azurewebsites.net_name": {
+          "value": "bpcalcapp.azurewebsites.net"
+      },
+      "hostNameBindings_bpcalcapp_bpcalcqa.azurewebsites.net_name": {
+          "value": "bpcalcapp-bpcalcqa.azurewebsites.net"
+      },
+      "hostNameBindings_bpcalcapp_bpcalcjlp.azurewebsites.net_name": {
+          "value": "bpcalcapp-bpcalcjlp.azurewebsites.net"
       }
     }
   }
