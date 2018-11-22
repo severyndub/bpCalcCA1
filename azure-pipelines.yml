@@ -34,6 +34,7 @@ steps:
   displayName: 'VsTest - testAssemblies'
   inputs:
     testAssemblyVer2: |
+<<<<<<< HEAD
      **\$(BuildConfiguration)\netcoreapp2.1\*UnitTest*.dll
      !**\obj\**
 
