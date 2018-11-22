@@ -36,6 +36,9 @@ steps:
     testAssemblyVer2: |
 <<<<<<< HEAD
      **\$(BuildConfiguration)\netcoreapp2.1\*UnitTest*.dll
+=======
+     **\$(BuildConfiguration)\*unittest*.dll
+>>>>>>> fb40f79d8e3d862a42408fad71829609ac38f37e
      !**\obj\**
 
     platform: '$(BuildPlatform)'
@@ -49,21 +52,56 @@ steps:
     PublishSymbols: false
 
   continueOnError: true
+<<<<<<< HEAD
+=======
+     
+>>>>>>> fb40f79d8e3d862a42408fad71829609ac38f37e
   - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory'
   inputs:
     Contents: |
-     **\*.dll
-     **\*.xml
-     **\chromedriver.exe
-     **\geckodriver.exe
-     **\IEDriverServer.exe
-     **\*.json
-     **\*.ps1
+     \**\*.dll
+     \**\*.xml
+     \**\chromedriver.exe
+     \**\geckodriver.exe
+     \**\IEDriverServer.exe
+     \**\*.json
+     \**\*.ps1
 
     TargetFolder: '$(Parameters.TargetFolder)'
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: bpCalcArtifacts'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
+<<<<<<< HEAD
     ArtifactName: bpCalcArtifacts
+=======
+    ArtifactName: bpCalcArtifacts   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+>>>>>>> fb40f79d8e3d862a42408fad71829609ac38f37e

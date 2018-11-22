@@ -23,19 +23,19 @@
 
 param(
  [string]
- $subscriptionId = "",
+ $subscriptionId = '961d6a2a-a993-44f5-bf3a-1fd3cb50404a',
 
  [string]
- $resourceGroupName = "",
+ $resourceGroupName = 'bpCalcRG',
 
  [string]
- $resourceGroupLocation = "",
-#$(System.DefaultWorkingDirectory)/bpCalcArtifacts/bpCalcArtifacts/Automation/template.json
+ $resourceGroupLocation = 'North Europe',
+
  [string]
- $templateFilePath = "",
-#$(System.DefaultWorkingDirectory)/bpCalcArtifacts/bpCalcArtifacts/Automation/parameters.json
+ $templateFilePath = "C:\Users\Test\OneDrive\DevOps\Continous Software Development\bp-master\Automation\template.json",
+
  [string]
- $parametersFilePath = ""
+ $parametersFilePath = "C:\Users\Test\OneDrive\DevOps\Continous Software Development\bp-master\Automation\parameters.json"
 )
 
 <#
