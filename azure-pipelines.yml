@@ -12,63 +12,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-#- task: NuGetToolInstaller@0
-#  displayName: 'Use NuGet 4.3.0'
-#  inputs:
-#    checkLatest: true
-#
-#- task: NuGetCommand@2
-#  inputs:
-#    restoreSolution: '$(solution)'
-
-#Your build pipeline references an undefined variable named ‘Parameters.solution’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references the ‘BuildPlatform’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-#Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-#- task: VSBuild@1
-#  displayName: 'Build solution'
-#  inputs:
-#    solution: '$(solution)'
-#    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
-#    platform: '$(buildPlatform)'
-#    configuration: '$(buildConfiguration)'
-#    createLogFile: true
-#
-#- task: VSTest@2
-#  displayName: 'Test Assemblies'
-#  inputs:
-#    testAssemblyVer2: |
-#     **\$(buildConfiguration)\netcoreapp2.1\*UnitTest*.dll
-#     !**\obj\**
-#    platform: '$(buildPlatform)'
-#    configuration: '$(buildConfiguration)'
-
-#- task: PublishBuildArtifacts@1
-#  displayName: 'Publish Artifact'
-#  inputs:
-#    PathtoPublish: 'BPCalculator'
-#    ArtifactName: '$(artifactsName)'
-
-#D:\a\r1\a\severyndub.bpCalcCA1\drop\BPCalculator.zip
-#D:\a\r1\a\severyndub.bpCalcCA1\bpCalcArtifacts\wwwroot
-    
-#- task: PublishBuildArtifacts@1
-#  displayName: 'Publish Artifact: drop'
-#  inputs:
-#    PathtoPublish: '$(build.artifactstagingdirectory)'
-#    ArtifactName: '$(artifactsName)'
-    
-    
-#- task: AzureRmWebAppDeployment@4
-#  displayName: 'Azure App Service Deploy: bpCalcCA1'
-#  inputs:
-#    azureSubscription: 'bpCalcConnection'
-#    WebAppName: bpcalctest2
-#    Package: 'D:\a\1\s\BPCalculator'
-#    WebAppUri: webAppUrl
-#    TakeAppOfflineFlag: true
-#    UseWebDeploy: true
-#    RemoveAdditionalFilesFlag: true
-
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 4.4.1'
   inputs:
@@ -95,7 +38,7 @@ steps:
   displayName: 'VsTest - testAssemblies'
   inputs:
     testAssemblyVer2: |
-     **\$(BuildConfiguration)\*test*.dll
+     **\$(BuildConfiguration)\*unittest*.dll
      !**\obj\**
 
     platform: '$(BuildPlatform)'
@@ -111,10 +54,24 @@ steps:
 
   continueOnError: true
      
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+  - task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'    
+    Contents: |
+     **\*.dll
+     **\*.xml
+     **\chromedriver.exe
+     **\geckodriver.exe
+     **\IEDriverServer.exe
+     **\*.json
+     **\*.ps1
+
+    TargetFolder: '$(Parameters.TargetFolder)'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: bpCalcArtifacts'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: bpCalcArtifacts   
     
     
     
