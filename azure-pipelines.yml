@@ -34,12 +34,8 @@ steps:
   displayName: 'VsTest - testAssemblies'
   inputs:
     testAssemblyVer2: |
-<<<<<<< HEAD
-     **\$(BuildConfiguration)\netcoreapp2.1\*UnitTest*.dll
-=======
-     **\$(BuildConfiguration)\*unittest*.dll
->>>>>>> fb40f79d8e3d862a42408fad71829609ac38f37e
-     !**\obj\**
+     \**\$(BuildConfiguration)\netcoreapp2.1\*UnitTest*.dll
+     \!**\obj\**
 
     platform: '$(BuildPlatform)'
 
@@ -52,10 +48,6 @@ steps:
     PublishSymbols: false
 
   continueOnError: true
-<<<<<<< HEAD
-=======
-     
->>>>>>> fb40f79d8e3d862a42408fad71829609ac38f37e
   - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory'
   inputs:
@@ -73,35 +65,4 @@ steps:
   displayName: 'Publish Artifact: bpCalcArtifacts'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
-<<<<<<< HEAD
     ArtifactName: bpCalcArtifacts
-=======
-    ArtifactName: bpCalcArtifacts   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
->>>>>>> fb40f79d8e3d862a42408fad71829609ac38f37e
