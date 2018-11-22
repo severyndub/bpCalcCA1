@@ -34,8 +34,8 @@ steps:
   displayName: 'VsTest - testAssemblies'
   inputs:
     testAssemblyVer2: |
-     \**\$(BuildConfiguration)\netcoreapp2.1\*UnitTest*.dll
-     \!**\obj\**
+     **\$(BuildConfiguration)\netcoreapp2.1\*UnitTest*.dll
+     **\obj\**
 
     platform: '$(BuildPlatform)'
 
@@ -49,16 +49,16 @@ steps:
 
   continueOnError: true
   - task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory'
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
     Contents: |
-     \**\*.dll
-     \**\*.xml
-     \**\chromedriver.exe
-     \**\geckodriver.exe
-     \**\IEDriverServer.exe
-     \**\*.json
-     \**\*.ps1
+     **\*.dll
+     **\*.xml
+     **\chromedriver.exe
+     **\geckodriver.exe
+     **\IEDriverServer.exe
+     **\*.json
+     **\*.ps1
 
     TargetFolder: '$(Parameters.TargetFolder)'
 - task: PublishBuildArtifacts@1
